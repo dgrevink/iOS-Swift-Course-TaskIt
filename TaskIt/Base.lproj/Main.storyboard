@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="CzT-qN-reK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="CzT-qN-reK">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -31,8 +31,37 @@
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qLT-ZX-cxf" id="Les-ol-7zo">
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Task" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oxK-6s-flD">
+                                                    <rect key="frame" x="8" y="9" width="247" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Subtask" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kjG-Cq-KWq">
+                                                    <rect key="frame" x="8" y="47" width="247" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AfQ-Oo-ekd">
+                                                    <rect key="frame" x="566" y="31" width="26" height="15"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
                                             <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstItem="AfQ-Oo-ekd" firstAttribute="trailing" secondItem="Les-ol-7zo" secondAttribute="trailingMargin" id="rfM-uk-4h0"/>
+                                                <constraint firstAttribute="centerY" secondItem="AfQ-Oo-ekd" secondAttribute="centerY" constant="-1" id="zM8-yN-Xoz"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="dateLabel" destination="AfQ-Oo-ekd" id="VUP-fr-cCS"/>
+                                            <outlet property="descriptionLabel" destination="kjG-Cq-KWq" id="eaS-Yw-Vy4"/>
+                                            <outlet property="taskLabel" destination="oxK-6s-flD" id="phs-3p-aiQ"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -52,11 +81,64 @@
                     <navigationItem key="navigationItem" id="r71-VE-VfL"/>
                     <connections>
                         <outlet property="tableView" destination="izZ-7N-lXr" id="Lx5-e8-XWT"/>
+                        <segue destination="e6E-jo-5mz" kind="show" identifier="showTaskDetail" id="fT9-Dm-MJf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1167" y="645"/>
+            <point key="canvasLocation" x="1165" y="645"/>
+        </scene>
+        <!--Task Detail View Controller-->
+        <scene sceneID="HzR-9g-DTp">
+            <objects>
+                <viewController id="e6E-jo-5mz" customClass="TaskDetailViewController" customModule="TaskIt" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="PVq-X8-kXE"/>
+                        <viewControllerLayoutGuide type="bottom" id="bPX-qc-4RD"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ydG-CH-Qjh">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="SubTask" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UzV-WZ-Z1N">
+                                <rect key="frame" x="16" y="110" width="568" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Task" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mxa-Ls-6FT">
+                                <rect key="frame" x="16" y="72" width="568" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="tI8-ce-MH8">
+                                <rect key="frame" x="16" y="148" width="568" height="162"/>
+                                <date key="date" timeIntervalSinceReferenceDate="438451746.162112">
+                                    <!--2014-11-23 16:09:06 +0000-->
+                                </date>
+                            </datePicker>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Mxa-Ls-6FT" firstAttribute="top" secondItem="PVq-X8-kXE" secondAttribute="bottom" constant="8" id="23o-d6-Mxf"/>
+                            <constraint firstItem="Mxa-Ls-6FT" firstAttribute="leading" secondItem="ydG-CH-Qjh" secondAttribute="leadingMargin" id="8Jc-2a-C6P"/>
+                            <constraint firstItem="tI8-ce-MH8" firstAttribute="trailing" secondItem="ydG-CH-Qjh" secondAttribute="trailingMargin" id="BTc-Zw-EnY"/>
+                            <constraint firstItem="Mxa-Ls-6FT" firstAttribute="trailing" secondItem="ydG-CH-Qjh" secondAttribute="trailingMargin" id="Hwc-Wg-P5q"/>
+                            <constraint firstItem="UzV-WZ-Z1N" firstAttribute="top" secondItem="Mxa-Ls-6FT" secondAttribute="bottom" constant="8" id="Mp2-v5-U32"/>
+                            <constraint firstItem="UzV-WZ-Z1N" firstAttribute="leading" secondItem="ydG-CH-Qjh" secondAttribute="leadingMargin" id="VzN-rj-jTD"/>
+                            <constraint firstItem="UzV-WZ-Z1N" firstAttribute="trailing" secondItem="ydG-CH-Qjh" secondAttribute="trailingMargin" id="YtW-CL-C3G"/>
+                            <constraint firstItem="tI8-ce-MH8" firstAttribute="leading" secondItem="ydG-CH-Qjh" secondAttribute="leadingMargin" id="anD-Tn-Aen"/>
+                            <constraint firstItem="tI8-ce-MH8" firstAttribute="top" secondItem="UzV-WZ-Z1N" secondAttribute="bottom" constant="8" id="nwB-7O-w00"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="datePicker" destination="tI8-ce-MH8" id="LUn-yZ-7Iu"/>
+                        <outlet property="descriptionLabel" destination="UzV-WZ-Z1N" id="OQ9-or-eVe"/>
+                        <outlet property="taskLabel" destination="Mxa-Ls-6FT" id="dn9-hW-UZU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JC2-Lb-H8u" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1852" y="645"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="BEh-gJ-Ml9">
