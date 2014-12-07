@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class TaskDetailViewController: UIViewController {
 
@@ -16,13 +17,12 @@ class TaskDetailViewController: UIViewController {
 
     
     var detailTaskModel: TaskModel!
-    var mainVC: ViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        self.taskLabel.text = detailTaskModel!.task
-        self.descriptionLabel.text = detailTaskModel!.subtask
+        self.taskLabel.text = detailTaskModel.task
+        self.descriptionLabel.text = detailTaskModel.subtask
         self.datePicker.date = detailTaskModel.date
         println(self.detailTaskModel.task);
     }
@@ -37,8 +37,12 @@ class TaskDetailViewController: UIViewController {
     }
     
     @IBAction func doneButtonTapped(sender: AnyObject) {
-        var task = TaskModel(task: taskLabel.text, subtask: descriptionLabel.text, date: datePicker.date, completed: false)
-        mainVC.baseArray[0][mainVC.tableView.indexPathForSelectedRow()!.row] = task
+        let appDelegate = (UIApplication.sharedApplication().delegate as AppDelegate)
+        detailTaskModel.task = taskLabel.text
+        detailTaskModel.subtask = descriptionLabel.text
+        detailTaskModel.date = datePicker.date
+        detailTaskModel.completed = detailTaskModel.completed
+        appDelegate.saveContext()
         self.navigationController?.popViewControllerAnimated(true)
     }
 
